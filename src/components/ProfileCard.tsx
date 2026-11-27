@@ -1,15 +1,18 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
+import type { ImageSourcePropType } from 'react-native';
 
-export default function ProfileCard() {
+interface ProfileCardProps {
+  nombre: string;
+  cargo: string;
+  imagen: ImageSourcePropType;
+}
+
+export default function ProfileCard({ nombre, cargo, imagen }: ProfileCardProps) {
   return (
     <View style={styles.card}>
-      <Image
-        source={require('./assets/images/perfil.jpg')}
-        style={styles.image}
-      />
-
-      <Text style={styles.name}>Dylan Ramon</Text>
-      <Text style={styles.description}>Desarrollador Full Stack</Text>
+      <Image source={imagen} style={styles.image} accessibilityLabel={`Perfil de ${nombre}`} />
+      <Text style={styles.name}>{nombre}</Text>
+      <Text style={styles.description}>{cargo}</Text>
     </View>
   );
 }
@@ -20,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: 24,
     borderRadius: 12,
+    marginBottom: 16,
     elevation: 4,
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
@@ -35,10 +39,13 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 22,
     fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#111827',
   },
   description: {
     fontSize: 14,
     color: '#666666',
     marginTop: 4,
+    textAlign: 'center',
   },
 });
